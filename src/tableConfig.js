@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from '@cloudscape-design/components';
+import {  Link } from 'react-router-dom';
 
 export function getMatchesCountText(count) {
     return count === 1 ? `1 match` : `${count} matches`;
@@ -9,7 +9,19 @@ export const columnDefinitions = [
     {
         id: "id",
         header: "id",
-        cell: item => <Link href={`#${item.id}`}>{item.id}</Link>,
+        cell: e => {
+            console.log("Link state:", { event: e });
+            return(
+                <Link
+                    to={{
+                        pathname: `/kpi/event/${e.id}`,
+                        state: '1231231231'
+                    }}
+                >
+                    {e.id}
+                </Link>
+            )
+        },
         width: 110,
         minWidth: 110,
         sortingField: "id",

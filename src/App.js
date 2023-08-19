@@ -1,5 +1,6 @@
 import {useState} from "react";
 import useProjects from './useProjects';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 import {
     AppLayout,
     Box,
@@ -11,7 +12,8 @@ import {
     Wizard,
     AttributeEditor,
     CodeEditor,
-    KPITableView
+    KPITableView,
+    EventDetail
 } from './components'
 
 export default function App() {
@@ -20,6 +22,15 @@ export default function App() {
     const projects = useProjects();
 
     return (
-        <KPITableView></KPITableView>
+        <Router>
+            <div>
+                <Link to="/kpi">Go to KPI Table</Link>
+                <Routes>
+                    <Route path="/kpi" element={<KPITableView />} />
+                    <Route path="/kpi/event/:id" element={<EventDetail />} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
+
