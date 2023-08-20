@@ -9,15 +9,14 @@ import CollectionPreferences from "@cloudscape-design/components/collection-pref
 import {KPIItems} from '../allData'
 import {useCollection} from '@cloudscape-design/collection-hooks';
 import {columnDefinitions, getMatchesCountText, paginationLabels} from '../tableConfig';
-
 export default () => {
-    // Preferences state
+    // Preference的预设值
     const [preferences, setPreferences] = useState({
         pageSize: 10,
         visibleContent: ['id', 'title', 'level', 'state', 'category', 'deadline']
     });
+    // 异步加载
     const [isLoaded, setIsLoaded] = React.useState(true)
-
     const loading = async () => {
         // 异步加载数据
         console.log(`异步加载`);
@@ -29,6 +28,7 @@ export default () => {
     React.useEffect(() => {
         loading().then(r => r)
     }, [])
+
     // 定义空状态
     function EmptyState({title, subtitle, action}) {
         return (
@@ -100,6 +100,7 @@ export default () => {
 
 
     return (
+
         <Table
             {...collectionProps}
             selectionType="single"
@@ -135,6 +136,7 @@ export default () => {
             stickyHeader
             stripedRows
             wrapLines={false}
+
         />
     );
 }

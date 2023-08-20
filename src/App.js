@@ -1,6 +1,6 @@
 import {useState} from "react";
 import useProjects from './useProjects';
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import {
     AppLayout,
     Box,
@@ -13,7 +13,8 @@ import {
     AttributeEditor,
     CodeEditor,
     KPITableView,
-    EventDetail
+    EventDetail,
+    ProjectView
 } from './components'
 
 export default function App() {
@@ -21,11 +22,13 @@ export default function App() {
     const [value, setValue] = useState("");
     const projects = useProjects();
 
+
     return (
         <Router>
             <div>
-                <Link to="/kpi">Go to KPI Table</Link>
                 <Routes>
+                    <Route path="/" element={<Navigate to="/projects" replace />} />
+                    <Route path="/projects" element={<ProjectView/>}></Route>
                     <Route path="/kpi" element={<KPITableView />} />
                     <Route path="/kpi/event/:id" element={<EventDetail />} />
                 </Routes>
@@ -33,4 +36,3 @@ export default function App() {
         </Router>
     );
 }
-

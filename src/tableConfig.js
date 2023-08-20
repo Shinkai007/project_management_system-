@@ -13,10 +13,8 @@ export const columnDefinitions = [
             console.log("Link state:", { event: e });
             return(
                 <Link
-                    to={{
-                        pathname: `/kpi/event/${e.id}`,
-                        state: '1231231231'
-                    }}
+                    to={`/kpi/event/${e.id}`}
+                    state={{ event: e }}
                 >
                     {e.id}
                 </Link>
