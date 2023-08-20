@@ -72,13 +72,16 @@ export default () => {
             header: "Name",
             cell: item => item.name,
             sortingField: "name",
-            isRowHeader: true
-        },
+            isRowHeader: true,
+            width: 200,
+            minWidth: 200,        },
         {
             id: "description",
             header: "Description",
             cell: item => item.alt,
-            sortingField: "alt"
+            sortingField: "alt",
+            width: 170,
+            minWidth: 165,
         }
     ];
 
@@ -155,12 +158,15 @@ export default () => {
                 // 修改选中信息
                 onSelectionChange={({detail}) => setSelectedProjects(detail.selectedItems)}
                 selectedItems={selectedProjects}
+                //点击行选中整行
+                onRowClick={({detail}) => detail && detail.item && setSelectedProjects([detail.item])}
                 columnDefinitions={tableColumns}
                 items={projects}
                 sortingDisabled
                 loadingText="Loading resources"
                 selectionType="single"
                 trackBy="id"
+                resizableColumns={true}
                 empty={
                     <Box
                         margin={{vertical: "xs"}}
@@ -206,11 +212,13 @@ export default () => {
                 onSelectionChange={({detail}) => setSelectedMembers(detail.selectedItems)}
                 selectedItems={selectedMembers}
                 sortingDisabled
+                onRowClick={({detail}) => detail && detail.item && setSelectedMembers([detail.item])}
                 columnDefinitions={tableColumns}
                 items={members}
                 loadingText="Loading resources"
                 selectionType="single"
                 trackBy="id"
+                resizableColumns={true}
                 empty={
                     <Box
                         margin={{vertical: "xs"}}
@@ -255,11 +263,13 @@ export default () => {
                 onSelectionChange={({detail}) => setSelectedSteps(detail.selectedItems)}
                 selectedItems={selectedSteps}
                 columnDefinitions={tableColumns}
+                onRowClick={({detail}) => detail && detail.item && setSelectedSteps([detail.item])}
                 items={steps}
                 sortingDisabled
                 loadingText="Loading resources"
                 selectionType="single"
                 trackBy="id"
+                resizableColumns={true}
                 empty={
                     <Box
                         margin={{vertical: "xs"}}
